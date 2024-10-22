@@ -1,0 +1,8 @@
+Flask==2.3.2
+langchain==0.3.4  # Update to the latest compatible version
+qdrant-client==1.9.1
+groq  # Remove the version specifier to use the latest compatible version
+langchain
+langchain-community
+langchain-groq
+llama_parse
