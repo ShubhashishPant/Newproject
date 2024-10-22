@@ -1,125 +1,274 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Nepal History Q&A</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        #answer {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            background-color: #f9f9f9;
-        }
-    </style>
-</head>
-<body>
-    <h1>Ask a Question About Nepal's History</h1>
-    <form method="post" action="/get_history">
-        <input type="text" name="question" placeholder="Type your question here..." required>
-        <input type="submit" value="Submit">
-    </form>
-    
-    <div id="answer">
-        {% if answer %}
-            <h2>Answer:</h2>
-            <p>{{ answer }}</p>
-        {% endif %}
-    </div>
-</body>
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nepal History Q&A</title>
+    <title>History Guide</title> <!-- Updated title -->
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: #2c2c2c;
+            /* Dark grey background */
+            color: #f5f5f5;
+            /* Light grey/white text */
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            height: 100vh;
         }
+
         h1 {
-            color: #2c3e50;
+            color: #ffffff;
             margin-bottom: 20px;
+            text-align: center;
+            overflow: hidden;
+            /* Ensures smooth transition */
         }
-        form {
+
+        /* Animation for the whole sentence */
+        .animated-text {
+            display: inline-block;
+            opacity: 0;
+            animation: slideIn 1.5s forwards;
+            font-size: 28px;
+            position: relative;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+                /* Start from the left */
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+                /* End at the normal position */
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            width: 100%;
-            max-width: 600px;
         }
+
+        form {
+            display: flex;
+            width: 100%;
+            padding: 10px;
+            background-color: #3e3e3e;
+            /* Dark grey input background */
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
         input[type="text"] {
-            width: 100%;
+            flex-grow: 1;
             padding: 12px;
-            border: 2px solid #bdc3c7;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            padding: 12px 20px;
-            background-color: #3498db;
-            color: white;
             border: none;
             border-radius: 5px;
+            margin-right: 10px;
+            font-size: 16px;
+            background-color: #f5f5f5;
+            /* Light grey input background */
+            color: #000000;
+            /* Black text */
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #999999;
+        }
+
+        input[type="submit"] {
+            width: 50px;
+            height: 50px;
+            background-color: #000000;
+            /* Black send button */
+            border: none;
+            border-radius: 50%;
+            /* Circular button */
+            color: white;
             font-size: 16px;
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             transition: background-color 0.3s ease;
         }
+
         input[type="submit"]:hover {
-            background-color: #2980b9;
+            background-color: #333333;
+            /* Slightly lighter black on hover */
         }
+
         #answer {
             margin-top: 30px;
             padding: 20px;
-            border-radius: 5px;
-            background-color: #ecf0f1;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #4d4d4d;
+            /* Medium grey background */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 600px;
+            color: #ffffff;
+            position: relative;
+
+            /* To position the copy button */
+            /* Only display answer if it exists */
+            display: {
+                % if answer %
+            }
+
+            block {
+                % else %
+            }
+
+            none {
+                % endif %
+            }
+
+            ;
+            /* Use server-side logic to control visibility */
         }
+
         h2 {
             margin-bottom: 10px;
-            color: #34495e;
+            color: #ffffff;
         }
+
         p {
             font-size: 18px;
             line-height: 1.6;
-            color: #2c3e50;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 14px;
+            background-color: #000000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #333333;
+        }
+
+        .refresh-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #000000;
+            /* Black refresh button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .refresh-btn:disabled {
+            background-color: #666666;
+        }
+
+        .refresh-btn:hover {
+            background-color: #333333;
+        }
+
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #000000;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            right: 20px;
+            top: 12px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
-    <h1>Ask a Question About Nepal's History</h1>
-    <form method="post" action="/get_history">
-        <input type="text" name="question" placeholder="Type your question here..." required>
-        <input type="submit" value="Submit">
-    </form>
-    
-    <div id="answer">
-        {% if answer %}
+    <h1 class="animated-text">Ask a Question About Nepal's History</h1> <!-- Animating the entire sentence -->
+
+    <div class="container">
+        <form method="post" action="/get_history">
+            <input type="text" name="question" placeholder="Type your question here..." required>
+            <input type="submit" value="&#9658;"> <!-- Send button with play icon -->
+        </form>
+
+        <div id="answer">
             <h2>Answer:</h2>
-            <p>{{ answer }}</p>
-        {% endif %}
-    </div>
+            <p id="generated-text">{{ answer }}</p>
+            <!-- Copy button for the generated text -->
+            <button class="copy-btn" id="copy-btn" onclick="copyText()">Copy</button>
+        </div>
+
+        <button class="refresh-btn" onclick="navigateToUrl();">Refresh</button> <!-- Simple refresh button -->
+        </div>
+
+        <script>
+        function navigateToUrl() {
+        // Navigate to the specified URL
+        window.location.href = 'http://127.0.0.1:5000/';
+        }
+
+        function copyText() {
+            // Get the text from the answer element
+            var textToCopy = document.getElementById("generated-text").textContent;
+
+            // Create a temporary input element to hold the text
+            var tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+
+            // Select and copy the text from the temporary input
+            tempInput.select();
+            document.execCommand("copy");
+
+            // Remove the temporary input from the document
+            document.body.removeChild(tempInput);
+
+            // Change the button text to "Copied"
+            var copyBtn = document.getElementById("copy-btn");
+            copyBtn.textContent = "Copied";
+
+            // Reset the button text after 2 seconds
+            setTimeout(function () {
+                copyBtn.textContent = "Copy"; // Reset to "Copy"
+            }, 2000); // Reset after 2 seconds
+        }
+    </script>
 </body>
+
 </html>

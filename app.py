@@ -10,7 +10,7 @@ app.config["DEBUG"] = True
 
 @app.route('/')
 def index():
-    return render_template('index.html', answer=None)  # Pass None initially
+    return render_template('index.html')  # Pass None initially
 
 @app.route('/get_history', methods=['POST'])
 def get_history():

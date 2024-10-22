@@ -16,8 +16,8 @@ from pydantic import BaseModel
 
 
 # Set the API keys and paths
-os.environ["GROQ_API_KEY"] = ""
-llama_api_key = ''
+os.environ["GROQ_API_KEY"] = "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"
+llama_api_key = 'llx-Axr7AFeJbw05sqrAwtG7nVjKxFohz4kN9oCd9CQoIT400C0o'
 utf8_document_path = r'D:\Downloads\IDM\Parsed_Documents\parsed_documents_utf8.md'
 
 # Load and parse documents
