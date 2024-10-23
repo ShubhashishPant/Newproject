@@ -1,0 +1,45 @@
+# Python specific
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.env
+
+# Virtual environment
+venv/
+ENV/
+env/
+*.egg-info/
+
+# Docker specific
+*.dockerignore
+docker-compose.override.yml
+
+# Logs
+*.log
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# IDE specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
